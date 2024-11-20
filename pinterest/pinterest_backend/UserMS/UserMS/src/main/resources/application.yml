@@ -1,0 +1,21 @@
+server:
+  port: 4002
+spring:
+  security:
+    user:
+      name: abhi
+      password: rup
+  cloud:
+    consul:
+      host: localhost
+      discovery:
+        enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/user_db
+    username: root
+    password: root
+  jpa:
+    hibernate.ddl-auto: update
+  application:
+    name: UserMS
