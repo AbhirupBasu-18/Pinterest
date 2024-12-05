@@ -1,5 +1,6 @@
 package com.pinterest.UserMS.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,17 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public List<UserDTO> showAllUsers() throws UserException{
-		return null;
+		List<UserDTO> ans=new ArrayList<>();
+		repo.findAll().forEach((it)->{
+			UserDTO xDto=new UserDTO();
+			xDto.setEmail(it.getEmail());
+			xDto.setPhoneNumber(it.getPhoneNumber());
+			xDto.setUsername(it.getUsername());
+			ans.add(xDto);
+		});
+		if(ans.size()==0) {
+			throw new UserException("No users are there") ;
+		}
+		return ans;
 	}
 }

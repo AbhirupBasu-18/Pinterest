@@ -13,7 +13,7 @@ import lombok.Data;
 public class Follow{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private Integer followerId;
-	private Integer followedId;
+	private Long id;
+	private Long followerId;
+	private Long followedId;
 }

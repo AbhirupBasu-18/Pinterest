@@ -8,12 +8,12 @@ import com.pinterest.FollowMS.entity.Follow;
 import java.util.List;
 
 @Repository
-public interface FollowRepository extends CrudRepository<Follow, Integer> {
+public interface FollowRepository extends CrudRepository<Follow, Long> {
 	//find if this row exists
-	public Follow findByFollowerIdAndFollowedId(Integer followerId,Integer followedId);
+	public Follow findByFollowerIdAndFollowedId(Long followerId,Long followedId);
 	//who follows this person
-	public List<Follow> findByFollowedId(Integer followedId);
+	public List<Follow> findByFollowedId(Long followedId);
 	//the person follows which people
-	public List<Follow> findByFollowerId(Integer followerId);
+	public List<Follow> findByFollowerId(Long followerId);
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +37,13 @@ public class UserApi {
 	}
 	@GetMapping(value = "/")
 	public String d(HttpServletRequest request){
-		
+	
 		return "done"+request.getSession().getId();
+	}
+	@GetMapping(value = "/csrf")
+	public CsrfToken getCsrfToken(HttpServletRequest request){
+		
+		return (CsrfToken) request.getAttribute("_csrf");
 	}
 	@PostMapping(value = "/create")
 	public ResponseEntity<String> createUser(@RequestBody UserDTO user) throws UserException {
@@ -45,8 +51,9 @@ public class UserApi {
 		return new ResponseEntity<String>(ans,HttpStatus.CREATED);
 	}
 	@GetMapping(value = "/getAll")
-	public ResponseEntity<List<UserDTO>> showAllUsers(){
-		return null;
+	public ResponseEntity<List<UserDTO>> showAllUsers() throws UserException{
+		List<UserDTO> ans=userService.showAllUsers();
+		return new ResponseEntity<List<UserDTO>>(ans,HttpStatus.OK);
 	}
 	@PostMapping(value = "/register")
 	public String register(){
